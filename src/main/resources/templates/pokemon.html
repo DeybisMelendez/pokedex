@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Pokémon</title>
+</head>
+<body>
+    <h1>Detalles del Pokémon</h1>
+
+    <div>
+        <h2 th:text="'Nombre: ' + ${pokemon.name}">Nombre</h2>
+        <p th:text="'ID: ' + ${pokemon.id}">ID</p>
+        <p th:text="'Altura: ' + ${pokemon.height} + ' decímetros'">Altura</p>
+        <p th:text="'Peso: ' + ${pokemon.weight} + ' hectogramos'">Peso</p>
+        <p th:text="'Experiencia Base: ' + ${pokemon.baseExperience}">Experiencia Base</p>
+
+        <h3>Tipos:</h3>
+        <ul>
+            <li th:each="type : ${pokemon.types}" th:text="${type}">Tipo</li>
+        </ul>
+
+        <h3>Estadísticas:</h3>
+        <ul>
+            <li th:each="stat : ${pokemon.stats}" th:text="${stat.key} + ': ' + ${stat.value}">Stat</li>
+        </ul>
+    </div>
+
+    <a href="/">Volver a buscar</a>
+</body>
+</html>
