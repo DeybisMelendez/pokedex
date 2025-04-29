@@ -3,28 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalles del Pokémon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #c22, #a44);
+            min-height: 100vh;
+            padding: 2rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #eee;
+        }
+
+        .pokedex-container {
+            background: #eee;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            color: #333;
+        }
+
+        .pokedex-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e11;
+            margin-bottom: 2rem;
+        }
+
+        h2, h3 {
+            color: #e11;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: #ddd;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        a.button-pokedex {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            background-color: #e44;
+            color: #eee;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        a.button-pokedex:hover {
+            background-color: #c11;
+        }
+    </style>
 </head>
 <body>
-    <h1>Detalles del Pokémon</h1>
 
-    <div>
-        <h2 th:text="'Nombre: ' + ${pokemon.name}">Nombre</h2>
-        <p th:text="'ID: ' + ${pokemon.id}">ID</p>
-        <p th:text="'Altura: ' + ${pokemon.height} + ' decímetros'">Altura</p>
-        <p th:text="'Peso: ' + ${pokemon.weight} + ' hectogramos'">Peso</p>
-        <p th:text="'Experiencia Base: ' + ${pokemon.baseExperience}">Experiencia Base</p>
+    <div class="pokedex-container">
+        <h1 class="pokedex-title">Detalles del Pokémon</h1>
 
-        <h3>Tipos:</h3>
-        <ul>
-            <li th:each="type : ${pokemon.types}" th:text="${type}">Tipo</li>
-        </ul>
+        <div>
+            <h2 th:text="'Nombre: ' + ${pokemon.name}">Nombre</h2>
+            <p th:text="'ID: ' + ${pokemon.id}">ID</p>
+            <p th:text="'Altura: ' + ${pokemon.height} + ' decímetros'">Altura</p>
+            <p th:text="'Peso: ' + ${pokemon.weight} + ' hectogramos'">Peso</p>
+            <p th:text="'Experiencia Base: ' + ${pokemon.baseExperience}">Experiencia Base</p>
 
-        <h3>Estadísticas:</h3>
-        <ul>
-            <li th:each="stat : ${pokemon.stats}" th:text="${stat.key} + ': ' + ${stat.value}">Stat</li>
-        </ul>
+            <h3>Tipos:</h3>
+            <ul>
+                <li th:each="type : ${pokemon.types}" th:text="${type}">Tipo</li>
+            </ul>
+
+            <h3>Estadísticas:</h3>
+            <ul>
+                <li th:each="stat : ${pokemon.stats}" th:text="${stat.key} + ': ' + ${stat.value}">Stat</li>
+            </ul>
+        </div>
+
+        <a href="/" class="button-pokedex">Volver a buscar</a>
     </div>
 
-    <a href="/">Volver a buscar</a>
 </body>
 </html>
