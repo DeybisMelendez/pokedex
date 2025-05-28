@@ -3,15 +3,15 @@ package com.unipoo.pokedex.models;
 import java.util.List;
 import java.util.Map;
 
-public class Pokemon extends PokemonBase {
+public class WaterPokemon extends Pokemon {
 
-    public Pokemon(int id, String name, int height, int weight, List<String> types,
+    public WaterPokemon(int id, String name, int height, int weight, List<String> types,
             Map<String, Integer> stats, int baseExperience) {
         super(id, name, height, weight, types, stats, baseExperience);
     }
 
     @Override
     public String getBattleCry() {
-        return "¡Soy un Pokémon genérico!";
+        return "¡Splash acuático!";
     }
 }

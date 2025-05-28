@@ -1,6 +1,8 @@
 package com.unipoo.pokedex.services;
 
 import com.unipoo.pokedex.models.Pokemon;
+import com.unipoo.pokedex.models.PokemonFactory;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,6 +49,6 @@ public class PokemonService {
         int baseExperience = (int) response.get("base_experience");
 
         // Creamos un objeto Pokémon con la información obtenida
-        return new Pokemon(id, pokemonName, height, weight, types, stats, baseExperience);
+        return PokemonFactory.createPokemon(id, pokemonName, height, weight, types, stats, baseExperience);
     }
 }
