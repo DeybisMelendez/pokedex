@@ -16,22 +16,20 @@ public class PokemonController {
         this.pokemonService = pokemonService;
     }
 
-    @GetMapping("/pokemon") // Por metodo get (via url) obtendrá el name del pokemon:
-                            // /pokemon?name=bulbasaur
-    public String getPokemon(@RequestParam("name") String name, Model model) {
-        Pokemon pokemon = pokemonService.getPokemonByName(name);
-
-        if (pokemon == null) {
+    @GetMapping("/pokemon")
+    public String getPokemon(@RequestParam String name, Model model) {
+        try {
+            Pokemon pokemon = pokemonService.getPokemonByName(name);
+            model.addAttribute("pokemon", pokemon);
+            return "pokemon"; // renderiza pokemon.html
+        } catch (Exception e) {
             model.addAttribute("error", "No se encontró el Pokémon con el nombre: " + name);
-            return "error"; // Debes crear una vista 'error.html' para mostrar errores
+            return "error"; // renderiza error.html
         }
-
-        model.addAttribute("pokemon", pokemon);
-        return "pokemon"; // Esto buscará una plantilla 'pokemon.html' para mostrar el resultado
     }
 
     @GetMapping("/")
     public String home() {
-        return "index"; // 'index.html' Vista principal donde puedes poner un formulario para buscar
+        return "index"; // renderiza index.html
     }
 }
