@@ -33,6 +33,10 @@ public class PokemonService {
         int height = (int) response.get("height");
         int weight = (int) response.get("weight");
 
+        // Extraer el sprite
+        Map<String, Object> sprites = (Map<String, Object>) response.get("sprites");
+        String spriteUrl = (String) sprites.get("front_default");
+
         // Procesamos los tipos del Pokémon
         List<Map<String, Object>> typesList = (List<Map<String, Object>>) response.get("types");
         List<String> types = typesList.stream()
@@ -48,7 +52,7 @@ public class PokemonService {
 
         int baseExperience = (int) response.get("base_experience");
 
-        // Creamos un objeto Pokémon con la información obtenida
-        return PokemonFactory.createPokemon(id, pokemonName, height, weight, types, stats, baseExperience);
+        // Creamos un objeto Pokémon con la información obtenida, incluyendo el sprite
+        return PokemonFactory.createPokemon(id, pokemonName, height, weight, types, stats, baseExperience, spriteUrl);
     }
 }

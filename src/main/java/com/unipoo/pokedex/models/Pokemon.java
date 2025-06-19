@@ -6,8 +6,8 @@ import java.util.Map;
 public class Pokemon extends PokemonBase {
 
     public Pokemon(int id, String name, int height, int weight, List<String> types,
-            Map<String, Integer> stats, int baseExperience) {
-        super(id, name, height, weight, types, stats, baseExperience);
+            Map<String, Integer> stats, int baseExperience, String spriteUrl) {
+        super(id, name, height, weight, types, stats, baseExperience, spriteUrl);
     }
 
     @Override

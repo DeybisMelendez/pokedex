@@ -1,97 +1,125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Detalles del Pokémon</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-    <style>
-        body {
-            background: linear-gradient(to right, #c22, #a44);
-            min-height: 100vh;
-            padding: 2rem;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #eee;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ficha Pokémon</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #c22, #a44);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      min-height: 100vh;
+      color: #eee;
+    }
 
-        .pokedex-container {
-            background: #eee;
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            color: #333;
-        }
+    .pokemon-card {
+      background-color: #1e1e1e;
+      color: #f4f4f4;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
 
-        .pokedex-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #e11;
-            margin-bottom: 2rem;
-        }
+    .pokemon-card .columns {
+      align-items: center;
+    }
 
-        h2, h3 {
-            color: #e11;
-        }
+    .pokemon-card .image-container {
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      
+    }
+    .pokemon-card figure {
+      padding: 0;
+      margin: 0;
+    }
+    .pokemon-card img {
+      width: 100%;
+      max-width: 256px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
 
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
+    .card-content {
+      padding: 2rem;
+    }
 
-        li {
-            background-color: #ddd;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: bold;
-        }
+    .pokemon-card .title {
+      color: #f55;
+      text-transform: capitalize;
+      margin-bottom: 1rem;
+    }
 
-        a.button-pokedex {
-            display: block;
-            text-align: center;
-            margin-top: 2rem;
-            background-color: #e44;
-            color: #eee;
-            padding: 1rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
+    .tag {
+      margin: 0.25rem;
+    }
 
-        a.button-pokedex:hover {
-            background-color: #c11;
-        }
-    </style>
+    ul {
+      list-style: disc inside;
+      margin-left: 0;
+      padding-left: 1rem;
+    }
+
+    .button-pokedex {
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .back-button {
+      background-color: #f55;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .back-button:hover {
+      background-color: #d22;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="pokedex-container">
-        <h1 class="pokedex-title">Detalles del Pokémon</h1>
+  <div class="pokemon-card card">
+    <div class="columns is-vcentered is-multiline">
+      <!-- Columna de la imagen -->
+      <div class="column image-container">
+        <figure class="image is-256x256">
+          <img th:src="${pokemon.spriteUrl}" alt="Sprite de ${pokemon.name}">
+        </figure>
+      </div>
 
-        <div>
-            <h2 th:text="'Nombre: ' + ${pokemon.name}">Nombre</h2>
-            <p th:text="'ID: ' + ${pokemon.id}">ID</p>
-            <p th:text="'Altura: ' + ${pokemon.height} + ' decímetros'">Altura</p>
-            <p th:text="'Peso: ' + ${pokemon.weight} + ' hectogramos'">Peso</p>
-            <p th:text="'Experiencia Base: ' + ${pokemon.baseExperience}">Experiencia Base</p>
-            <p th:text="'Grito: ' + ${pokemon.getBattleCry()}">Experiencia Base</p>
+      <!-- Columna de la información -->
+      <div class="column">
+        <div class="card-content">
+          <h1 class="title is-3" th:text="${pokemon.name}">Nombre</h1>
+          <p><strong>ID:</strong> <span th:text="${pokemon.id}">ID</span></p>
+          <p><strong>Altura:</strong> <span th:text="${pokemon.height}">Altura</span> dm</p>
+          <p><strong>Peso:</strong> <span th:text="${pokemon.weight}">Peso</span> hg</p>
+          <p><strong>Experiencia Base:</strong> <span th:text="${pokemon.baseExperience}">Experiencia</span></p>
+          <p><strong>Grito:</strong> <span th:text="${pokemon.getBattleCry()}">¡Pika!</span></p>
 
-            <h3>Tipos:</h3>
-            <ul>
-                <li th:each="type : ${pokemon.types}" th:text="${type}">Tipo</li>
-            </ul>
+          <h2 class="subtitle is-6 mt-4">Tipos:</h2>
+          <div class="tags has-addons" >
+            <span class="tag is-info"
+            th:each="type : ${pokemon.types}"
+            th:text="${type}">Tipo</span>
+          </div>
 
-            <h3>Estadísticas:</h3>
-            <ul>
-                <li th:each="stat : ${pokemon.stats}" th:text="${stat.key} + ': ' + ${stat.value}">Stat</li>
-            </ul>
+          <h2 class="subtitle is-6 mt-4">Estadísticas:</h2>
+          <ul>
+            <li class="button is-small is-fullwidth is-danger is-outlined" th:each="stat : ${pokemon.stats}" th:text="${stat.key + ': ' + stat.value}">Stat</li>
+          </ul>
+
+          <a href="/" class="button back-button button-pokedex">Volver a buscar</a>
         </div>
-
-        <a href="/" class="button-pokedex">Volver a buscar</a>
+      </div>
     </div>
+  </div>
 
 </body>
 </html>
