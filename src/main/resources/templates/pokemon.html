@@ -111,9 +111,17 @@
           </div>
 
           <h2 class="subtitle is-6 mt-4">Estadísticas:</h2>
-          <ul>
-            <li class="button is-small is-fullwidth is-danger is-outlined" th:each="stat : ${pokemon.stats}" th:text="${stat.key + ': ' + stat.value}">Stat</li>
-          </ul>
+          <div th:each="stat : ${pokemon.stats}" class="columns is-vcentered" style="margin-bottom: 0.5rem;">
+            <div class="column is-4 has-text-right">
+                <span th:text="${stat.key}">Stat</span>
+            </div>
+            <div class="column is-2 has-text-centered">
+                <span th:text="${stat.value}">0</span>
+            </div>
+            <div class="column is-6">
+                <progress class="progress is-info" max="200" th:value="${stat.value}"></progress>
+            </div>
+          </div>
 
           <a href="/" class="button back-button button-pokedex">Volver a buscar</a>
         </div>
